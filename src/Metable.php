@@ -32,7 +32,9 @@ trait Metable
     {
         // delete all attached meta on deletion
         static::deleted(function (self $model) {
-            $model->purgeMeta();
+			if (!method_exists(__CLASS__, 'trashed')){
+				$model->purgeMeta();
+			}
         });
     }
 
